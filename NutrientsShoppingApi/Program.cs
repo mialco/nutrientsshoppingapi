@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.IISIntegration;
 
 namespace NutrientsShoppingApi
 {
@@ -14,10 +15,13 @@ namespace NutrientsShoppingApi
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
+				//.UseUrls("http://localhost:3001")
+				.UseContentRoot(Directory.GetCurrentDirectory())
+				.UseSetting("detailedErrors","true")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
+				.CaptureStartupErrors(true)
+                //.UseApplicationInsights()
                 .Build();
 
             host.Run();

@@ -7,12 +7,19 @@ using System.Collections;
 using Microsoft.AspNetCore.Mvc;
 using NutrientsShoppingApi.Repositories;
 using NutrientsShoppingApi.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NutrientsShoppingApi.Controllers
 {
+	/// <summary>
+	/// In order to identify the authorization, we will use for the begining User.Claim(clientNname) 
+	/// User.Claims.Where(x=>x.Type=="client_id").FirstOrDefault().Value
+	/// With this we can retrieve the client name and decide based on the user if we allow the respective resource or not 
+	/// </summary>
 	[Produces("application/json")]
 	//[Route("api/[controller]/count")]
 	[Route("api/[controller]")]
+	[Authorize]
 	public class AflProductsController : Controller
 	{
 		IAflProductRepository _aflProductRepository;
@@ -52,7 +59,7 @@ namespace NutrientsShoppingApi.Controllers
 		[HttpGet("{categoryName}/{page:int}/{pageSize:int}", Name = "AflProductByCategoryName", Order = 1)]
 		public IActionResult GetWithFilterCategoryName(string categoryName, int page, int pageSize)
 		{
-
+		
 			try
 			{
 				var filter = new AflProductFilter { CategoryName = categoryName, IsActive = true, DateActive = DateTime.Today };
@@ -81,7 +88,8 @@ namespace NutrientsShoppingApi.Controllers
 		/// <param name="page"></param>
 		/// <param name="pageSize"></param>
 		/// <returns></returns>
-		[HttpGet("{categoryId:int}/{page:int}/{pageSize:int}",Name ="AflProductByCategory",Order =1)]	
+		[HttpGet("{categoryId:int}/{page:int}/{pageSize:int}",Name ="AflProductByCategory",Order =1)]
+		
 		public IActionResult GetWithFilterCategoryId(int categoryId, int page, int pageSize)
 		{
 
