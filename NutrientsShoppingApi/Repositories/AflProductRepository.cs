@@ -49,6 +49,7 @@ namespace NutrientsShoppingApi.Repositories
 			catch (Exception ex)
 			{
 				//todo: log error
+				Console.WriteLine(ex);
 				return null;
 			}
 
@@ -143,6 +144,7 @@ namespace NutrientsShoppingApi.Repositories
 			catch (Exception ex)
 			{
 				//todo: Log Error
+				Console.WriteLine(ex);
 				return null;
 			}
 		}

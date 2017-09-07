@@ -18,8 +18,9 @@ namespace NutrientsShoppingApi.Controllers
 
         // GET api/values
         [HttpGet]
-        public async Task<IEnumerable<string>> Get()
-        {
+//        public async Task<IEnumerable<string>> Get()
+		public  IEnumerable<string> Get()
+		{
 			//var v1 =  await _limanContext.AflProducts.Select(x => x.ProductName).Take(20).ToListAsync();
 			var v1 =  _limanContext.AflProducts.Select(x => x.ProductName).Take(20).ToList();
 

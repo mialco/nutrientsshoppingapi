@@ -11,6 +11,7 @@ namespace NutrientsShoppingApi.DAL
 	{
 		public LimanContext(DbContextOptions<LimanContext> options) : base(options)
 		{
+		
 		}
 
 		public DbSet<AflProduct> AflProducts { get; set; }
@@ -20,6 +21,7 @@ namespace NutrientsShoppingApi.DAL
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			var x = 1;
+			x++;
 			//modelBuilder.Entity<AflProduct>().ToTable("AflProducts");
 		}
 
