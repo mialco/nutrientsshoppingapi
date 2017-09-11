@@ -10,10 +10,10 @@ namespace NutrientsShoppingApi.DAL.Models
 	[Table("AflProducts",Schema="Liman")]
 	public class AflProduct
 	{
-
-		//public int ID { get; set; }
+		[Column("ProdID")]
+		//[Key,ForeignKey("AflProductDetail")]
 		[Key]
-		public  long ProdID { get; set; }
+		public long ProdID { get; set; }
 		public string ProductName { get; set; }
 		public string Description { get; set; }
 		public string NavigateUrl { get; set; }
@@ -30,6 +30,9 @@ namespace NutrientsShoppingApi.DAL.Models
 		public DateTime? StartDate { get; set; }
 		public DateTime? EndDate { get; set; }
 		public bool IsActive { get; set; }
+
+		//[ForeignKey("ProdID")]
+		public virtual AflProductDetail AflProductDetail { get; set; }
 
 		//[ForeignKey("ProdID")]
 		//public virtual IEnumerable <AflProducts_Categorie> AflProducts_Categorie { get;set;}

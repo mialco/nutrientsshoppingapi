@@ -23,7 +23,7 @@ namespace NutrientsShoppingApi.Controllers
 		{
 			//var v1 =  await _limanContext.AflProducts.Select(x => x.ProductName).Take(20).ToListAsync();
 			var v1 =  _limanContext.AflProducts.Select(x => x.ProductName).Take(20).ToList();
-
+			
 			return v1;
 			//return new string[] { "value1", "value2" };
         }

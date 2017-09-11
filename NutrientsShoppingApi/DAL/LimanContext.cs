@@ -11,17 +11,16 @@ namespace NutrientsShoppingApi.DAL
 	{
 		public LimanContext(DbContextOptions<LimanContext> options) : base(options)
 		{
-		
+
 		}
 
 		public DbSet<AflProduct> AflProducts { get; set; }
-		public DbSet<AflProductCategorie> AflProductCategories {get ; set;}
+		public DbSet<AflProductCategorie> AflProductCategories { get; set; }
 		public DbSet<AflProducts_Categorie> AflProducts_Categories { get; set; }
+		public DbSet<AflProductDetail> AflProductDetail {get;set;}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			var x = 1;
-			x++;
 			//modelBuilder.Entity<AflProduct>().ToTable("AflProducts");
 		}
 

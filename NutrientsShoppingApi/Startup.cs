@@ -34,18 +34,11 @@ namespace NutrientsShoppingApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-			//services.Configure<IISOptions>(options => {
-			//	options.AutomaticAuthentication = false;
-			//	options.ForwardClientCertificate = true;
-			//	options.ForwardWindowsAuthentication = false;
-			//});
-
 			services.AddCors();
 			
 
 			// Add framework services.
-			services.AddDbContext<LimanContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+			services.AddDbContext<LimanContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Liman")));
 			//services.AddDbContext<LimanContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalSql")));
 			Console.WriteLine(Configuration.GetConnectionString("LocalSql"));
 			Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));
@@ -54,12 +47,12 @@ namespace NutrientsShoppingApi
 			services.AddMvc();
 
 
-			// Add Swagger API Documentation
-			// Register the Swagger generator, defining one or more Swagger documents
-			//services.AddSwaggerGen(c =>
-			//{
-			//	c.SwaggerDoc("v1", new Info { Title = "Nutrients Shopping API", Version = "v1" });
-			//});
+			//Add Swagger API Documentation
+			 //Register the Swagger generator, defining one or more Swagger documents
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new Info { Title = "Nutrients Shopping API", Version = "v1" });
+			});
 
 		}
 

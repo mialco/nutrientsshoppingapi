@@ -1,0 +1,2 @@
+﻿// Publish Project command
+dotnet publish -c Release -o C:\Data\WebsitesDeployments\NutrientsShoppingApi
