@@ -12,7 +12,7 @@ namespace NutrientsShoppingApi.DAL.Models
 	{
 		[Column("ProdID")]
 		//[Key,ForeignKey("AflProductDetail")]
-		[Key]
+		[Key, ForeignKey("AflProduct_Categorie")]
 		public long ProdID { get; set; }
 		public string ProductName { get; set; }
 		public string Description { get; set; }
@@ -34,7 +34,7 @@ namespace NutrientsShoppingApi.DAL.Models
 		//[ForeignKey("ProdID")]
 		public virtual AflProductDetail AflProductDetail { get; set; }
 
-		//[ForeignKey("ProdID")]
-		//public virtual IEnumerable <AflProducts_Categorie> AflProducts_Categorie { get;set;}
+		[ForeignKey("ProdID")]
+		public virtual IEnumerable <AflProducts_Categorie> AflProducts_Categories { get;set;}
 	}
 }

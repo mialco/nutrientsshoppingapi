@@ -70,25 +70,25 @@ namespace NutrientsShoppingApi
 			app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
 			{
 				//Authority = "http://localhost:5001",
-				Authority = Configuration.GetValue<String>("Authority",""),
+				Authority = Configuration.GetValue<String>("Authority", ""),
 				RequireHttpsMetadata = false,
-				ApiName = "nutrientsApi"
-				//, AutomaticAuthenticate = true
-				//, AutomaticChallenge = true
-				//ApiSecret = "mybestkeptnutrientsshoppingsecret"
+				ApiName = "nutrientsApi",
+				//AutomaticAuthenticate = false
+				//AutomaticChallenge = true
+				ApiSecret = "mybestkeptnutrientsshoppingsecret"
 			});
 
 			app.UseMvc();
 			//DbInitializer.Initialize(context);
 
 			// Enable middleware to serve generated Swagger as a JSON endpoint.
-			//app.UseSwagger();
+			app.UseSwagger();
 
 			// Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
-			//app.UseSwaggerUI(c =>
-			//{
-			//	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nutrients Shopping API  V1");
-			//});
+			app.UseSwaggerUI(c =>
+			{
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Nutrients Shopping API  V1");
+			});
 		}
 
 		

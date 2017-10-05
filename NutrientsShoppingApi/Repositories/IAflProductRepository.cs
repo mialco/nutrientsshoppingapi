@@ -12,7 +12,7 @@ namespace NutrientsShoppingApi.Repositories
 		IEnumerable<AflProduct> GetAll();
 		AflProductsPage GetAflProductsPage(int page, int pageSize, AflProductFilter filter);
 
-		AflProductItem Find(long productId);
+		AflProductItemWithDetails Find(long productId);
 		int Count(AflProductFilter filter);
     }
 }

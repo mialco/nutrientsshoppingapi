@@ -17,15 +17,26 @@ namespace NutrientsShoppingApi.Repositories
 		{
 			_context = context;
 		}
-		public AflProductItem Find(long productId)
+
+		public AflProductItemWithDetails Find(long productId)
 		{
 			try
 			{
-				var v = _context.AflProducts.Where(x => x.ProdID == productId).FirstOrDefault();
+				
+					var v = _context.AflProducts.Where(x => x.ProdID == productId).
+					Include(p => p.AflProductDetail)
+					.Include(pc=>pc.AflProducts_Categories)
+					.ThenInclude(c=>c.AflProductCategorie)
+					.FirstOrDefault();
 
 				if (v != null)
 				{
-					var prod = new AflProductItem
+
+					if (v.AflProductDetail == null)
+					{
+						v.AflProductDetail = new AflProductDetail();
+					}
+					var prod = new AflProductItemWithDetails
 					{
 						prodId = v.ProdID,
 						productName = v.ProductName,
@@ -40,7 +51,15 @@ namespace NutrientsShoppingApi.Repositories
 						linkCode = v.LinkCode,
 						advertiser = v.Advertiser,
 						price = v.Price,
-						advertizerLinkID = v.AdvertizerLinkID
+						advertizerLinkID = v.AdvertizerLinkID,
+						desc1 = v.AflProductDetail.Description1,
+						desc2 = v.AflProductDetail.Description2,
+						detailIsActive = v.AflProductDetail.IsActive.HasValue ? v.AflProductDetail.IsActive.Value : false,
+						articleTitle = v.AflProductDetail.ArticleTitle,
+						metaDescription = v.AflProductDetail.MetaDescription,
+						metaKeywords = v.AflProductDetail.MetaKeywords,
+						title = v.AflProductDetail.Title	,
+						categories = v.AflProducts_Categories == null ? null : v.AflProducts_Categories.Select(x=>x.AflProductCategorie.ProductCategoryName).ToList()
 					};
 					return prod;
 				}

@@ -8,13 +8,16 @@ using Microsoft.AspNetCore.Mvc;
 using NutrientsShoppingApi.Repositories;
 using NutrientsShoppingApi.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
+using NutrientsShoppingApi.Models;
 
 namespace NutrientsShoppingApi.Controllers
 {
 	/// <summary>
 	/// In order to identify the authorization, we will use for the begining User.Claim(clientNname) 
 	/// User.Claims.Where(x=>x.Type=="client_id").FirstOrDefault().Value
-	/// With this we can retrieve the client name and decide based on the user if we allow the respective resource or not 
+	/// With this we can retrieve the client name and decide based on the user if we allow the respective resource or not
+	/// User subject can identify the user id with this code
+	/// User.Claims.Where(x=>x.Type=="sub").Select(y=>y.Value).FirstOrDefault()
 	/// </summary>
 	[Produces("application/json")]
 	//[Route("api/[controller]/count")]
@@ -55,6 +58,12 @@ namespace NutrientsShoppingApi.Controllers
 			return new ObjectResult(v);
 		}
 
+		[HttpPost(Name="Insert New Product", Order =10)]
+		public IActionResult InsertProduct(AflProductItem aflProductItem)
+		{
+			var x =Request.Form["ClientID"].ToString();
+			return new JsonResult("{\"new Object\":\"new object value\" }}");
+		}
 
 		[HttpGet("{categoryName}/{page:int}/{pageSize:int}", Name = "AflProductByCategoryName", Order = 1)]
 		public IActionResult GetWithFilterCategoryName(string categoryName, int page, int pageSize)
